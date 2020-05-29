@@ -3,6 +3,6 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg01 " {
-  name     = "CRTestRG01"
+  name     = "crtestrg01"
   location = "UKSouth"
 }
