@@ -26,8 +26,5 @@ resource "azurerm_subnet" "subnet01" {
   resource_group_name = azurerm_resource_group.rg01.name
   virtual_network_name = azurerm_virtual_network.vnet01.name
   address_prefix = "10.100.1.0/24"
-  tags = {
-    environment = "CR TFE Demo"
-  }
 }
   
