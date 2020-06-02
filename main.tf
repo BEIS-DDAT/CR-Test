@@ -60,3 +60,26 @@ resource "azurerm_network_security_group" "nsg01" {
         environment = "CR TFE Demo"
     }
 }
+
+resource "azurerm_network_interface" "NIC01" {
+    name                        = "CRTestNIC01"
+    location                    = "UKSouth"
+    resource_group_name         = azurerm_resource_group.rg01.name
+
+    ip_configuration {
+        name                          = "CRTestNic01Config"
+        subnet_id                     = azurerm_subnet.subnet01.id
+        private_ip_address_allocation = "Dynamic"
+        public_ip_address_id          = azurerm_public_ip.CRTFEpip01.id
+    }
+
+    tags = {
+        environment = "CR TFE Demo"
+    }
+}
+
+# Connect the security group to the network interface
+resource "azurerm_network_interface_security_group_association" "NicNSG01" {
+    network_interface_id      = azurerm_network_interface.NIC01.id
+    network_security_group_id = azurerm_network_security_group.nsg01.id
+}
